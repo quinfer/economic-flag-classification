@@ -77,12 +77,15 @@ python scripts/simple_real_figures.py
 ├── train.py                 # Main training script (RS5M ViT-H-14)
 ├── requirements.txt         # Dependencies
 ├── datasets/
-│   └── NIFlagsV2/          # Flag dataset (5,490 samples)
+│   └── NIFlagsV2/          # Flag dataset structure (5,490 samples)
 ├── configs/                # Training configurations  
 ├── trainers/               # Model implementations
 ├── scripts/                # Evaluation and figure generation
-├── checkpoints/            # Model checkpoints (download separately)
-└── docs/                   # Methodology documentation
+├── figures/                # Publication-quality result figures
+├── docs/
+│   ├── thesis_paper.pdf    # Complete academic paper
+│   └── METHODOLOGY.md      # Technical methodology
+└── checkpoints/            # Model checkpoints (download separately)
 ```
 
 ## Dataset Description
@@ -114,6 +117,16 @@ All experiments use fixed seeds (42, 123, 456) and documented hyperparameters:
 - Learning rate: 1e-4  
 - Epochs: 30
 - Optimizer: AdamW with differential learning rates
+
+## Academic Paper
+
+The complete academic paper is available at [`docs/thesis_paper.pdf`](docs/thesis_paper.pdf). This provides:
+
+- **Theoretical Framework**: Economic concentration theory applied to class imbalance
+- **Detailed Methodology**: RS5M adaptation and hierarchical prompting
+- **Comprehensive Results**: Statistical validation including 5-fold cross-validation
+- **Economic Analysis**: HHI-based consolidation rationale and community impact assessment
+- **Publication-Quality Figures**: All results visualizations available in [`figures/`](figures/)
 
 ## Citation
 
