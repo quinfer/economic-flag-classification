@@ -1,0 +1,13 @@
+torch>=2.0.0
+torchvision>=0.15.0
+numpy
+pillow
+ftfy
+regex
+tqdm
+pandas
+pyarrow
+scipy
+scikit-learn
+matplotlib
+pyyaml
