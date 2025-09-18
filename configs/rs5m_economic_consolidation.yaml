@@ -1,5 +1,5 @@
-# RS5M Economic Consolidation Configuration
-# Based on paper: "Economic Concentration as Domain Knowledge for Extreme Class Imbalance"
+# RS5M Economic Taxonomy Configuration
+# Based on: "Hierarchical Flag Classification through Economic Domain Knowledge"
 
 DATALOADER:
   TRAIN_X:

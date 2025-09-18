@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Economic Consolidation Training Script
-Reproduces results from: "Economic Concentration as Domain Knowledge for Extreme Class Imbalance"
+Hierarchical Taxonomy Training Script (Economic 7-category task)
+Reference: hierarchical flag classification guided by economic domain knowledge.
 
-Key Results:
-- 94.78% accuracy (vs 0.56% baseline)
-- 67.5% macro-F1 (vs 15.2% baseline)  
-- 87% attention on flags (vs 23% baseline)
+Reference results (same data source, different taxonomies):
+- 70-class (fine-grained): ~40.8% accuracy
+- 16-class (intermediate): ~72.6% accuracy
+- 7-class (economic): ~94.78% accuracy; Macro-F1 ~67.5%
+- Attention focus on flag regions ~87% under hierarchical prompting
 
 Usage:
     python train_economic_consolidation.py --seed 42
@@ -56,25 +57,30 @@ def set_seed(seed: int):
 
 
 def load_dataset_splits(data_root: Path):
-    """Load the exact splits used in paper: train(3,823), val(841), test(826)"""
-    
+    """Load available splits and report counts (no hard-coded expectations)."""
+    split_names = ['train', 'val', 'test']
     splits = {}
-    for split_name in ['train', 'val', 'test']:
+    for split_name in split_names:
         split_file = data_root / f"{split_name}.txt"
-        if not split_file.exists():
-            raise FileNotFoundError(f"Split file not found: {split_file}")
-            
-        with open(split_file) as f:
-            lines = f.readlines()
-            
-        splits[split_name] = len(lines)
-        
-    print(f"📊 Dataset Splits (from paper):")
-    print(f"   Train: {splits['train']} (expected: 3,823)")
-    print(f"   Val: {splits['val']} (expected: 841)")  
-    print(f"   Test: {splits['test']} (expected: 826)")
-    print(f"   Total: {sum(splits.values())} (expected: 5,490)")
-    
+        if split_file.exists():
+            with open(split_file) as f:
+                lines = f.readlines()
+            splits[split_name] = len(lines)
+        else:
+            # Mark missing splits explicitly
+            splits[split_name] = 0
+
+    total = sum(splits.values())
+    print("📊 Dataset splits detected:")
+    for k in split_names:
+        present = "present" if splits[k] > 0 else "missing"
+        print(f"   {k:>5}: {splits[k]} samples ({present})")
+    print(f"   Total (across present splits): {total}")
+
+    # If none found, raise a clear error
+    if all(splits[k] == 0 for k in split_names):
+        raise FileNotFoundError(f"No split files found under {data_root}")
+
     return splits
 
 
@@ -94,7 +100,7 @@ def main():
     
     print("🚀 Economic Consolidation Training")
     print("=" * 50)
-    print(f"Paper: Economic Concentration as Domain Knowledge for Extreme Class Imbalance")
+    print("Paper: Hierarchical Flag Classification through Economic Domain Knowledge")
     print(f"Seed: {args.seed}")
     print(f"Expected Results: 94.78% accuracy, 67.5% macro-F1")
     print()

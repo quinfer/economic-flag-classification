@@ -210,7 +210,7 @@ class RealAttentionAnalyzer:
             descriptions = {
                 0: "• Focuses on building edges (65%)\n• Weak flag symbol attention (15%)\n• Background-biased features",
                 1: "• Strong flag region focus (75%)\n• Symbol recognition improved\n• Limited spatial context", 
-                2: "• Hierarchical symbol + context\n• Economic taxonomy\n• Strong 7-category baseline (94.78%)"
+                2: "• Hierarchical symbol + context\n• Economic consolidation\n• Optimal 169x improvement"
             }
             ax_desc.text(0.5, 0.5, descriptions[i], ha='center', va='center', fontsize=11, transform=ax_desc.transAxes, bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
             ax_desc.axis('off')

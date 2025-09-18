@@ -1,32 +1,35 @@
-# Economic Consolidation for Extreme Class Imbalance: Flag Classification
+# Hierarchical Flag Classification through Economic Domain Knowledge: A Vision Transformer Approach for Cultural Symbol Recognition
 
 **MSc Artificial Intelligence - Themed Research Project**  
 **Researcher**: Barry Quinn, Professor of Finance  
-**Supervisor**: Dr. Shuyan Wang  
+**Supervisor**: Dr. Shuyan Li  
 **Institution**: Queen's University Belfast  
 **Year**: 2024-2025
 
 ## Project Overview
 
-This research investigates the application of economic concentration theory to address extreme class imbalance in computer vision tasks. The study focuses on flag classification within Northern Ireland street imagery, a domain characterized by severe class imbalance (169:1 ratio) that renders traditional machine learning approaches ineffective.
+This work introduces a novel flag classification task addressing real-world challenges in cultural symbol recognition. We collected a new dataset of Northern Ireland street imagery and developed a hierarchical classification framework guided by economic domain knowledge. Rather than claiming to “solve” a 70-class fine-grained problem by collapsing labels, we explicitly formulate a task with a principled taxonomy designed for practical applications and measurable evaluation.
 
-**Key Contribution**: Economic consolidation of 70 fine-grained classes into 7 theoretically-motivated categories achieves 94.78% classification accuracy, representing a 169-fold improvement over baseline performance (0.56%).
+Key contributions:
+- New dataset of 4,501 images from Northern Ireland for cultural symbol recognition
+- Hierarchical taxonomy design (70 → 16 → 7) informed by economic domain knowledge
+- Strong baseline models based on a ViT-H-14 backbone, achieving 94.78% accuracy on the 7-category task
 
-**Data Availability Notice**: This repository contains code, methodology, and results only. The underlying Google Street View imagery cannot be publicly shared due to licensing restrictions and terms of service limitations.
+Data availability: This repository contains code, methodology, and summary results. The underlying Google Street View imagery cannot be publicly shared due to licensing restrictions and terms of service limitations.
 
-## Research Approach
+## Task Formulation and Approach
 
-This work demonstrates that domain-specific theoretical frameworks can provide superior solutions to extreme class imbalance compared to traditional data engineering approaches. The methodology employs the Herfindahl-Hirschman Index (HHI) from industrial economics to consolidate flag classes based on their economic and social impact within Northern Ireland communities.
-
-The approach challenges conventional wisdom in machine learning by prioritizing domain knowledge over algorithmic complexity, showing that theoretically-grounded class consolidation substantially outperforms standard techniques such as oversampling, undersampling, and focal loss implementations.
+We frame flag recognition as hierarchical classification with three granularity levels: (1) 70 fine-grained classes, (2) 16 semantically grouped classes, and (3) 7 economically meaningful categories. Economic domain knowledge guides the taxonomy design using concentration concepts (e.g., HHI) to articulate community impact and practical relevance. This framing clarifies the target task and evaluation protocol without positioning taxonomy design as a remedy for class imbalance.
 
 ## Empirical Results
 
-- **Classification Accuracy**: 94.78% (baseline: 0.56%)
-- **Performance Improvement**: 169-fold increase over conventional approaches
-- **Architecture**: RS5M ViT-H-14 (Vision Transformer pre-trained on remote sensing data)
-- **Dataset**: 5,490 expert-annotated flag instances from Northern Ireland street imagery
-- **Statistical Validation**: Multi-seed testing and 5-fold cross-validation confirm robustness
+- Granularity comparison (same data source, different taxonomies):
+  - 70-class fine-grained baseline: 40.8% accuracy (challenging reference)
+  - 16-class intermediate grouping: 72.6% accuracy (semantic consolidation)
+  - 7-class economic taxonomy: 94.78% accuracy (task-focused baseline)
+- Architecture: RS5M ViT-H-14 (Vision Transformer pre-trained on remote sensing data)
+- Dataset: 4,501 images (2,030 training; 2,471 testing)
+- Validation: multi-seed testing and 5-fold cross-validation conducted for robustness
 
 ## Implementation
 
@@ -46,7 +49,7 @@ python verify_setup.py
 
 ### Training Protocol
 ```bash
-# Execute primary training pipeline with economic consolidation
+# Execute primary training pipeline for the 7-category economic taxonomy
 python train_economic_consolidation.py
 
 # Alternative: use configuration-based training
@@ -55,7 +58,7 @@ python train.py --config configs/rs5m_economic_consolidation.yaml
 
 ### Results Reproduction
 
-**Multi-seed validation** (reproduces 94.78% ± 0.22%):
+Multi-seed validation (reference: 94.78% ± 0.22% on 7-category task):
 ```bash
 python train_economic_consolidation.py --seed 42 --output-dir results/seed_42
 python train_economic_consolidation.py --seed 123 --output-dir results/seed_123  
@@ -77,42 +80,46 @@ python scripts/simple_real_figures.py
 ├── train.py                 # Main training script (RS5M ViT-H-14)
 ├── requirements.txt         # Dependencies
 ├── datasets/
-│   └── NIFlagsV2/          # Flag dataset structure (5,490 samples)
+│   └── NIFlagsV2/          # Flag dataset structure and splits metadata
 ├── configs/                # Training configurations  
 ├── trainers/               # Model implementations
 ├── scripts/                # Evaluation and figure generation
 ├── figures/                # Publication-quality result figures
 ├── docs/
 │   ├── thesis_paper.pdf    # Complete academic paper
-│   └── METHODOLOGY.md      # Technical methodology
+│   └── METHODOLOGY.md      # Technical methodology (hierarchical taxonomy)
 └── checkpoints/            # Model checkpoints (download separately)
 ```
 
 ## Dataset Description
 
-**Data Availability**: Google Street View terms of service explicitly prohibit redistribution of raw imagery. Consequently, this repository provides dataset structure, annotations, class mappings, and metadata only. Researchers seeking to reproduce this work must obtain their own street-level imagery through appropriate licensing channels.
+Google Street View terms prohibit redistribution of raw imagery. This repository provides taxonomy, splits metadata, scripts, and summary results. Researchers should obtain street-level imagery via appropriate licensing channels.
 
-The dataset comprises 5,490 flag instances from Northern Ireland, derived from a comprehensive street-level imagery analysis. The original taxonomy contained 70 fine-grained classes exhibiting extreme imbalance (169:1 ratio). The core methodological innovation involves consolidating these into 7 economically-motivated categories based on community impact theory.
+Dataset overview:
+- 4,501 images from Northern Ireland street scenes
+- Splits: 2,030 training, 2,471 testing
+- Original taxonomy: 70 fine-grained classes
+- Proposed hierarchy: 70 → 16 → 7 (economically meaningful categories)
 
-**Economic Class Taxonomy**:
-1. **Major_Unionist** (2,047 instances) - Ulster Banner, Union Jack territorial displays
-2. **Cultural_Fraternal** (892 instances) - Orange Order, GAA organizational symbols  
-3. **International** (485 instances) - EU, foreign national representations
-4. **Nationalist** (354 instances) - Irish tricolor territorial markers
-5. **Paramilitary** (312 instances) - UVF, UDA, associated symbols
-6. **Commemorative** (233 instances) - Historical, military memorial displays
-7. **Sport_Community** (178 instances) - Local sporting club identifiers
+Economic categories (largest to smallest by count):
+1. Major_Unionist — 2,047 samples
+2. Cultural_Fraternal — 892 samples  
+3. International — 485 samples
+4. Nationalist — 354 samples
+5. Paramilitary — 312 samples
+6. Commemorative — 233 samples
+7. Sport_Community — 178 samples
 
 ## Methodology
 
-1. **Economic Consolidation**: Groups classes by community impact using HHI concentration theory
-2. **RS5M ViT-H-14**: Vision transformer pre-trained on remote sensing imagery  
-3. **Hierarchical Prompting**: Multi-level attention steering for economic categories
-4. **Quality Control**: Confidence filtering and inter-annotator reliability
+1. Hierarchical Taxonomy Design: economically grounded grouping from 70 → 16 → 7
+2. RS5M ViT-H-14: Vision transformer backbone and training setup  
+3. Hierarchical Prompting: multi-level attention steering aligned to taxonomy
+4. Quality Control: confidence filtering and inter-annotator reliability
 
 ## Reproducibility
 
-All experiments use fixed seeds (42, 123, 456) and documented hyperparameters:
+Experiments use fixed seeds (42, 123, 456) and documented hyperparameters:
 - Batch size: 8
 - Learning rate: 1e-4  
 - Epochs: 30
@@ -120,19 +127,18 @@ All experiments use fixed seeds (42, 123, 456) and documented hyperparameters:
 
 ## Academic Paper
 
-The complete academic paper is available at [`docs/thesis_paper.pdf`](docs/thesis_paper.pdf). This provides:
-
-- **Theoretical Framework**: Economic concentration theory applied to class imbalance
-- **Detailed Methodology**: RS5M adaptation and hierarchical prompting
-- **Comprehensive Results**: Statistical validation including 5-fold cross-validation
-- **Economic Analysis**: HHI-based consolidation rationale and community impact assessment
-- **Publication-Quality Figures**: All results visualizations available in [`figures/`](figures/)
+The complete manuscript is available at `docs/thesis_paper.pdf`. It details:
+- Task definition and dataset contribution
+- Hierarchical taxonomy design using economic domain knowledge
+- Baseline models and evaluation protocol
+- Statistical validation (multi-seed, cross-validation)
+- Figures available in `figures/`
 
 ## Citation
 
 ```bibtex
-@mastersthesis{quinn2025economic,
-  title={Economic Concentration as Domain Knowledge for Extreme Class Imbalance: A Case Study in Flag Classification},
+@mastersthesis{quinn2025hierarchical,
+  title={Hierarchical Flag Classification through Economic Domain Knowledge: A Vision Transformer Approach for Cultural Symbol Recognition},
   author={Quinn, Barry},
   school={Queen's University Belfast},
   year={2025},
@@ -142,12 +148,12 @@ The complete academic paper is available at [`docs/thesis_paper.pdf`](docs/thesi
 
 ## Contact
 
-For inquiries regarding methodology, reproduction, or collaboration opportunities:  
-Barry Quinn - b.quinn@ulster.ac.uk
+For inquiries regarding methodology, reproduction, or collaboration:  
+Barry Quinn — b.quinn@ulster.ac.uk
 
 ## Acknowledgments
 
-The author acknowledges Dr. Shuyan Wang for supervision and methodological guidance, particularly in identifying and resolving critical implementation issues that initially produced artifactually high performance metrics. Appreciation is extended to the RS5M development team for providing pre-trained model weights under open license.
+The author acknowledges Dr. Shuyan Li for supervision and methodological guidance. Appreciation is extended to the RS5M development team for providing pre-trained model weights under open license.
 
 ---
-*This work forms part of an MSc Artificial Intelligence thesis at Queen's University Belfast. The experimental phase is complete; manuscript preparation is in progress.*
+*This work forms part of an MSc Artificial Intelligence thesis at Queen's University Belfast. The experimental phase is complete; manuscript preparation follows the reframed task specification.*

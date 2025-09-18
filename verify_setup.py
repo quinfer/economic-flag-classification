@@ -1,36 +1,45 @@
 #!/usr/bin/env python3
 """
-Setup verification for Economic Consolidation reproduction
+Setup verification for hierarchical flag classification task
+Checks dataset structure, available splits, and model checkpoint.
 """
 
 from pathlib import Path
 
 def verify_dataset():
-    """Check dataset structure and splits"""
+    """Check dataset structure and splits (generic reporting)"""
     data_root = Path("datasets/NIFlagsV2")
-    
+
     print("Dataset verification:")
-    
-    # Check split files exist and have expected counts
-    expected_counts = {'train': 3823, 'val': 841, 'test': 826}
-    
-    for split, expected in expected_counts.items():
+
+    # Report any available split files and their line counts
+    split_names = ["train", "val", "test"]
+    total = 0
+    found_any = False
+    for split in split_names:
         split_file = data_root / f"{split}.txt"
         if split_file.exists():
+            found_any = True
             with open(split_file) as f:
                 actual = len(f.readlines())
-            print(f"  {split}: {actual} samples (expected: {expected})")
+            total += actual
+            print(f"  {split}: {actual} samples")
         else:
-            print(f"  {split}: MISSING")
-    
+            print(f"  {split}: not present")
+
+    if found_any:
+        print(f"  Total (across present splits): {total}")
+    else:
+        print("  No split files found under datasets/NIFlagsV2")
+
     # Check class names
     classnames_file = data_root / "classnames.txt"
     if classnames_file.exists():
         with open(classnames_file) as f:
-            classes = f.read().strip().split('\n')
-        print(f"  Classes: {len(classes)} categories")
-    
-    print(f"  Total expected: 5,490 samples across 7 economic categories")
+            classes = [c for c in f.read().strip().split('\n') if c]
+        print(f"  Classes file present: {len(classes)} categories declared")
+    else:
+        print("  Classes file missing: datasets/NIFlagsV2/classnames.txt")
 
 def verify_model_checkpoint():
     """Check if RS5M checkpoint is available"""
