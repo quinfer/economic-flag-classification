@@ -70,3 +70,9 @@ results/*/
 *.temp
 temp/
 tmp/
+
+# Private drafts (keep untracked)
+brief_review_request.txt
+draft_email_shuyan_review.txt
+docs/thesis_paper_backup_*.pdf
+docs/thesis_paper_backup_*.pdf
