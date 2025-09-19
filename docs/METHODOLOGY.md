@@ -10,7 +10,11 @@
 ### Dataset Summary
 - 4,501 images from Northern Ireland street scenes
 - Splits: 2,030 training; 2,471 testing
-- Original label space: 70 fine-grained classes (Category–MountType–SpecificFlag)
+- Original experimental label space (paper): 70 fine-grained classes (Category–MountType–SpecificFlag)
+
+### Taxonomy Variants
+- Verification taxonomy (NIFlagsV2, 90 classes): included in the submission to support reproduce‑from‑root checks. Fixed splits used by `verify_setup.py`: Train 3,823; Val 841; Test 826; Total 5,490.
+- Experimental taxonomy (70 classes): curated from the same label pool via (a) synonym/alias merges, (b) exclusion of ultra‑rare or low‑confidence categories, (c) normalization of a small number of display‑context variants into primary classes to enforce single‑label evaluation. The 70‑class set is then consolidated to 16 and 7 for the hierarchical analysis.
 
 ## Hierarchical Taxonomy Design
 
@@ -29,6 +33,8 @@ Economic categories and counts:
 5. Paramilitary — 312 samples
 6. Commemorative — 233 samples
 7. Sport_Community — 178 samples
+
+These counts illustrate a long‑tailed distribution that motivates the hierarchical evaluation.
 
 ## Model and Training
 

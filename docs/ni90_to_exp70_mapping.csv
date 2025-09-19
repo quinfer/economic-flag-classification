@@ -1,0 +1,15 @@
+ni90_label,exp70_label,action,rationale,confidence,notes
+"International-Lamppost-mounted-Palestinian","International-Palestinian","normalize","Fold display-context variant into primary class label for single-label evaluation","medium","Example mapping"
+"International-Lamppost-mounted-Israeli","International-Israeli","normalize","Fold display-context variant into primary class label for single-label evaluation","medium","Example mapping"
+"National-Lamppost-mounted-Union Jack","National-Union Jack","normalize","Context (mount type) removed to maintain consistent granularity","high","Example mapping"
+"National-Lamppost-mounted-Ulster Banner","National-Ulster Banner","normalize","Context (mount type) removed to maintain consistent granularity","high","Example mapping"
+"Fraternal-Pole-mounted (in ground)-Royal Black Institution","Fraternal-Royal Black Institution","normalize","Context normalization; same semantic class","medium","Example mapping"
+"Proscribed-Unknown-Other Proscribed","Proscribed-Other Proscribed","normalize","Unknown context merged into primary class label","medium","Example mapping"
+"Bunting-Bunting display-Mixed Flags Bunting","Bunting-Mixed Flags Bunting","normalize","Display-context variant folded into primary class label","medium","Example mapping"
+"Sport-Unknown-Local Club","Sport-Local Club","normalize","Unknown context merged into primary label","medium","Example mapping"
+"Historical-Building-mounted-WW1 Commemorative","Historical-WW1 Commemorative","normalize","Mounting context removed","high","Example mapping"
+"Military-Pole-mounted (in ground)-Royal Irish Regiment","Military-Royal Irish Regiment","normalize","Mounting context removed","high","Example mapping"
+"Proscribed-Temporary installation-Other Proscribed",,"exclude","Ultra-rare/low-confidence variant excluded from experimental taxonomy","low","Requires curator confirmation"
+"International-Window display-Other International","International-Other International","normalize","Context normalization","medium","Example mapping"
+"National-Unknown-Scottish Saltire","National-Scottish Saltire","normalize","Unknown context merged into primary label","high","Example mapping"
+

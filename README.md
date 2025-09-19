@@ -21,6 +21,11 @@ Data availability: This repository contains code, methodology, and summary resul
 
 We frame flag recognition as hierarchical classification with three granularity levels: (1) 70 fine-grained classes, (2) 16 semantically grouped classes, and (3) 7 economically meaningful categories. Economic domain knowledge guides the taxonomy design using concentration concepts (e.g., HHI) to articulate community impact and practical relevance. This framing clarifies the target task and evaluation protocol without positioning taxonomy design as a remedy for class imbalance.
 
+Taxonomy variants (verification vs experimental):
+- Verification (NIFlagsV2): the submission ships a 90-class fine‑grained taxonomy with fixed Train/Val/Test splits (3,823 / 841 / 826 = 5,490) to support reproduce‑from‑root checks (see `verify_setup.py`).
+- Experimental (paper): a curated 70-class fine‑grained taxonomy derived from the same labels via synonym merges, exclusion of ultra‑rare/low‑confidence categories, and normalization of a few display‑context variants to enforce single‑label evaluation. The 70-class set is then consolidated to 16 and 7 categories for hierarchical experiments.
+  - Mapping template: see `docs/ni90_to_exp70_mapping.csv` (with `docs/ni90_to_exp70_mapping_README.md` for guidance).
+
 ## Empirical Results
 
 - Granularity comparison (same data source, different taxonomies):
@@ -30,6 +35,8 @@ We frame flag recognition as hierarchical classification with three granularity 
 - Architecture: RS5M ViT-H-14 (Vision Transformer pre-trained on remote sensing data)
 - Dataset: 4,501 images (2,030 training; 2,471 testing)
 - Validation: multi-seed testing and 5-fold cross-validation conducted for robustness
+
+Observed imbalance (7-category view): Major_Unionist (2,047), Cultural_Fraternal (892), International (485), Nationalist (354), Paramilitary (312), Commemorative (233), Sport_Community (178). These counts illustrate the long‑tail and motivate hierarchy‑aware evaluation.
 
 ## Implementation
 
