@@ -1,7 +1,7 @@
 # Hierarchical Flag Classification through Economic Domain Knowledge: A Vision Transformer Approach for Cultural Symbol Recognition
 
 **MSc Artificial Intelligence - Themed Research Project**  
-**Researcher**: Barry Quinn, Professor of Finance  
+**Researcher**: Barry Quinn
 **Supervisor**: Dr. Shuyan Li  
 **Institution**: Queen's University Belfast  
 **Year**: 2024-2025
@@ -147,7 +147,7 @@ The complete manuscript is available at `docs/thesis_paper.pdf`. It details:
 @mastersthesis{quinn2025hierarchical,
   title={Hierarchical Flag Classification through Economic Domain Knowledge: A Vision Transformer Approach for Cultural Symbol Recognition},
   author={Quinn, Barry},
-  school={Queen's University Belfast},
+  school={EEECS, Queen's University Belfast},
   year={2025},
   type={MSc Thesis}
 }
